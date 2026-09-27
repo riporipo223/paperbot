@@ -55,6 +55,7 @@ type Q<T> = { value: T | null; quality: 'FRESH'|'STALE'|'DEGRADED'|'UNKNOWN'; ag
 | GET | `/api/v1/system/streams` | Active subscriptions (wallets, pools), per-stream quality and last event age |
 | GET | `/api/v1/system/events?level&type&from&to` | Paged `ops.system_events` |
 | GET | `/api/v1/system/gaps?resolution` | Paged `ops.data_gaps` |
+| POST | `/api/v1/system/client-metrics` | Optional (Phase 22): dashboard posts sampled render latency `{channel, deltaType, serverAt, renderedAtServerTimeEst}`. Service token via the dashboard server. |
 | GET | `/metrics` | Prometheus text format |
 
 ### 4.2 Runs and config
