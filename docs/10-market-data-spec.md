@@ -148,7 +148,7 @@ Fetched on `token.discovered` and refreshed every `reference.safety_refresh_minu
 - Mint account (`getAccountInfo` jsonParsed): `mintAuthority`, `freezeAuthority`, `supply`, `decimals`, token program, Token-2022 extensions (reject `transferFeeConfig`, `permanentDelegate`, `nonTransferable`, `transferHook`, `defaultAccountState=frozen` per risk config).
 - Optional: `getTokenLargestAccounts` → top-10 holder share (excluding known pool/curve vaults).
 
-Stored in `ref.token_safety_observations`, and consumed by the risk token gates ([15](15-risk-engine-spec.md) §4.3).
+Stored in `ref.token_safety_observations`, and consumed by the risk token gates ([15](15-risk-engine-spec.md) §4).
 
 ## 11. Market data acceptance tests (summary)
 

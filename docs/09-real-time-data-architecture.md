@@ -146,7 +146,7 @@ The answers to "How long did it take us to detect this wallet buy?" (`detect_*` 
 
 ### 5.2 Internal domain events (bus only; persisted in owning tables)
 
-`smart.buy.detected`, `pool.selected`, `token.rejected`, `watch.requested`, `watch.released`, `market.state.changed`, `wallet.score.updated`, `wave.updated`, `signal.emitted`, `decision.made`, `risk.evaluated`, `order.created`, `order.submitted`, `order.filled`, `order.failed`, `position.opened`, `position.updated`, `position.closed`, `portfolio.updated`, `ai.output.recorded`, `entries.paused`, `entries.resumed`, `run.started`, `run.stopped`, `run.halted`.
+`smart.buy.detected`, `smart.sell.detected`, `pool.selected`, `token.rejected`, `watch.requested`, `watch.released`, `market.state.changed`, `wallet.score.updated`, `wave.updated`, `signal.emitted`, `decision.made`, `risk.evaluated`, `order.created`, `order.submitted`, `order.filled`, `order.failed`, `position.opened`, `position.updated`, `position.closed`, `portfolio.updated`, `ai.output.recorded`, `entries.paused`, `entries.resumed`, `run.started`, `run.stopped`, `run.halted`.
 
 These are **derived** from ingested events plus config plus seed, so replay recreates them. They are not replay inputs.
 
