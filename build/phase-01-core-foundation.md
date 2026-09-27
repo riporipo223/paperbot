@@ -124,7 +124,7 @@ Read by `bootstrap/load-config.ts`: `PAPERBOT_ENV`, `PAPERBOT_STRATEGY_CONFIG`, 
 
 **01.14 Forbidden-env guard**
 - Tests first: each pattern in [21](../docs/21-security-spec.md) §4 triggers `SAF_FORBIDDEN_ENV` (name patterns, 64-int JSON array value, base58-64-byte value, 12-word mnemonic-like value). The allowlisted names (`WS_TOKEN_SECRET`, `SESSION_SECRET`) pass. The error message contains the variable name but **not** the value.
-- Implement: `assertNoForbiddenEnv(env)`. Include a compact BIP-39 wordlist check (a wordlist file used only for detection).
+- Implement: `assertNoForbiddenEnv(env)`. Include a compact BIP-39 wordlist check (a wordlist file used only for detection). Add `env-guard.ts`, its wordlist, and its tests to the safety scanner's explicit allowlist (detection code legitimately contains these patterns). Record the allowlist entry in the verification note.
 
 **01.15 Mode guard**
 - Tests first: SIMULATION passes. SHADOW fails unless `features.shadow_enabled`. LIVE always fails.

@@ -35,7 +35,9 @@ Anything that behaves differently in replay (other than those three ports) is a 
 
 ## 3. Replay modes
 
-| Option | Values | Default |
+Per-run replay parameters are supplied via the CLI/API when starting a replay run (the reproducibility-relevant ones, such as range, ordering and seed, are stored on `strategy.runs`). Engine-level replay defaults live under `replay.*` in `config/base.yaml` ([26](26-configuration-reference.md) §3).
+
+| Parameter | Values | Default |
 |---|---|---|
 | `replay.ordering` | `AS_RECEIVED` (by `session_id`, `ingest_seq`, across sessions by session start), `BY_EVENT_TIME` (by `slot`, then `event_time`, then `received_at`) | `AS_RECEIVED` |
 | `replay.speed` | `MAX` (as fast as possible), `REALTIME`, `xN` | `MAX` |

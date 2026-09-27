@@ -145,7 +145,7 @@ Latency impact is recorded in `L4_decision`. In `ADVISORY` mode the decision nev
 
 ## 8. Budget and cost control
 
-- `ai.daily_budget_usd` (default 1.00) and `ai.max_calls_per_hour` per agent. Cost is computed from response usage × configured price table (`ai.pricing`, maintained manually and verified against official pricing at Phase 16).
+- `ai.daily_budget_usd` (default 1.00) and `ai.agents.<AGENT>.max_calls_per_hour` per agent. Cost is computed from response usage × configured price table (`ai.pricing`, maintained manually and verified against official pricing at Phase 16).
 - On exceeding the budget: all agents return `BUDGET_EXCEEDED` until the UTC day rolls over. The decision path uses the fallback.
 
 ## 9. Prompting standards

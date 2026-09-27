@@ -25,7 +25,7 @@
 The MVP must make real execution **impossible, not merely disabled**:
 
 1. **No signing capability in the codebase.** Banned identifiers and imports (enforced by `scripts/check-safety.ts` in CI and ESLint `no-restricted-imports`/`no-restricted-syntax`):
-   - Imports: `@solana/web3.js` `Keypair`, `@solana/kit` signer/keypair and transaction-sending modules (`generateKeyPairSigner`, `createKeyPairSignerFromBytes`, `signTransaction`, `sendAndConfirmTransactionFactory`, `sendTransactionWithoutConfirmingFactory`, and any `*Signer*` export), `bip39`, `ed25519-hd-key`, `tweetnacl` sign APIs, `bs58` decode of 64-byte secrets.
+   - Imports: the entire `@solana/web3.js` package (the project uses `@solana/kit` only for encoding/decoding helpers), `@solana/kit` signer/keypair and transaction-sending modules (`generateKeyPairSigner`, `createKeyPairSignerFromBytes`, `signTransaction`, `sendAndConfirmTransactionFactory`, `sendTransactionWithoutConfirmingFactory`, and any `*Signer*` export), `bip39`, `ed25519-hd-key`, `tweetnacl` sign APIs, `bs58` decode of 64-byte secrets.
    - RPC method strings: `sendTransaction`, `sendRawTransaction`, `simulateTransaction`, `requestAirdrop`.
    - File patterns: `*.keypair.json`, `id.json`, `**/wallet*.json` in the repo (gitignored and scan-blocked).
 2. **Read-only RPC client.** `SolanaReadClient` exposes only the allowlisted methods ([27](27-data-provider-reference.md) §4.4). A generic `call(method)` asserts the allowlist and throws `SAF_RPC_METHOD_BLOCKED` otherwise. Unit-tested.

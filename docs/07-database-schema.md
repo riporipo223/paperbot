@@ -62,7 +62,8 @@ create table ref.venues (
   verified_at      timestamptz,                     -- when fee_model/program_id last verified against official source
   verification_ref text,                            -- URL / IDL hash used for verification
   created_at       timestamptz not null default now(),
-  updated_at       timestamptz not null default now()
+  updated_at       timestamptz not null default now(),
+  check (not supported or (verified_at is not null and verification_ref is not null))
 );
 
 create table ref.tokens (
@@ -721,7 +722,7 @@ create table ops.clock_offsets (
 | Rule | Enforcement |
 |---|---|
 | Ledger transactions balance per asset | App check before commit + `DEFERRABLE INITIALLY DEFERRED` constraint trigger on `sim.ledger_entries` |
-| A fill's `pool_state_event_id` refers to a `FRESH` state no older than `freshness.pool_state_fill_max_age_ms` | App invariant (executor) + reconciliation test |
+| A fill's `pool_state_event_id` refers to a `FRESH` state no older than `freshness.pool_state.fill_ms` | App invariant (executor) + reconciliation test |
 | `strategy.runs.mode` never `LIVE` | CHECK constraint (§3.4) |
 | Order status transitions follow the lifecycle | App state machine + `sim.order_transitions` audit. The DB trigger rejects illegal `from→to` pairs. |
 | Position quantities equal ledger balances | Reconciliation job after each fill (in-process) and nightly |
@@ -758,6 +759,7 @@ Runs daily (scheduler) with config `retention.*` ([26](26-configuration-referenc
 | 0011 | risk_decisions, decisions (without the `ai_output_id` FK) | 13 |
 | 0012 | orders, order_transitions, fills + order transition trigger | 14 |
 | 0013 | ai_outputs + `ALTER TABLE strategy.decisions ADD CONSTRAINT ... FOREIGN KEY (ai_output_id)` | 16 |
+| 0014 | `sim.shadow_quotes` (defined in Phase 26; not part of the MVP DDL above) | 26 |
 
 Each phase adds only its own migration. Migrations are forward-only. A corrective change is a new migration.
 

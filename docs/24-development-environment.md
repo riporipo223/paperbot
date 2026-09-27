@@ -105,6 +105,11 @@ SESSION_SECRET=                     # ≥ 32 random bytes
 | `pnpm dev:engine` | Run the engine with watch mode (tsx) |
 | `pnpm dev:dashboard` | Run Next.js dev server |
 | `pnpm replay -- --config <id> --from <iso> --to <iso> [--seed n]` | Replay run |
+| `pnpm replay:verify -- --run <id>` | Determinism check of a recorded run (Phase 17) |
+| `pnpm replay:study -- --base <configId> --vary k=v1,v2 [--preset validation]` | Parameter/sensitivity study (Phase 17) |
+| `pnpm run:start -- --config <id>` / `pnpm run:stop -- --run <id>` | Start/stop a LIVE_FEED simulation run from the CLI (Phase 15) |
+| `pnpm ai:research -- --run <id>` | RESEARCH agent over a completed run (Phase 16) |
+| `pnpm dashboard:hash-password` | Generate `DASHBOARD_PASSWORD_HASH` (Phase 19) |
 | `pnpm fixtures:record -- <recorder> [...]` | Record provider fixtures (real network; manual only) |
 | `pnpm trace:audit -- --run <id>` | Decision trace completeness |
 | `pnpm check:safety` | No-signing/no-secret static scan |

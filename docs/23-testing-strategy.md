@@ -46,7 +46,7 @@ Exceptions (tests after code) are allowed only for: generated code, pure configu
 - `SimulatedClock` + scheduler
 - `ReplayEventSource` (from the fixture) or fake live adapters
 - a real Postgres (Testcontainers) or an in-memory repository implementation (unit-speed mode; both implement the same ports, and a subset of scenarios runs against both to prevent drift)
-- `FakeLlmClient` (scripted outputs/timeouts)
+- `FakeAiAdvisor` at the strategy port level (Phase 15), and `FakeLlmClient` with scripted outputs/timeouts once the AI layer exists (Phase 16+)
 - a network guard that fails the test on any outbound connection
 
 Assertions use query helpers: `expectDecisions(...)`, `expectFills(...)`, `expectPortfolio(...)`, `expectTraceComplete(...)`.

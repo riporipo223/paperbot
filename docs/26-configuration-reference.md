@@ -5,7 +5,7 @@
 | Status | Draft v0.1 |
 | Upstream | All domain specs (they define the semantics). This file is the single registry of keys and defaults. |
 | Downstream | `packages/config` (zod schema), `config/*.yaml`, dashboard config editor |
-| Used by phases | 01 (schema skeleton), each domain phase adds its section, 15 (strategy file complete) |
+| Used by phases | 01 (full schema + default files), later phases consume; new keys follow §5 |
 
 ## 1. Structure
 
@@ -239,15 +239,20 @@ watch:
   max_tracked_wallets: 100
   linger_seconds: 120
   capture_mode: STRATEGY             # STRATEGY | BROAD (19 §2)
+  debug_pools: []                    # diagnostics: always watch these pools (Phase 07)
+  debug_auto_watch_wallet_buys: false  # dev only: watch pools of any tracked-wallet buy (Phase 08 demo)
 pipeline:
   dedup: { ttl_seconds: 86400, max_keys: 2000000 }
   persist: { flush_ms: 250, batch_size: 500, max_buffer: 100000 }
   lateness_slots: 12
   queues: { adapter_inbound: 10000, enrichment: 1000, bus_per_subject: 5000 }
+  module_failure_threshold: { count: 20, window_s: 60 }   # module circuit (Phase 04)
 market_state:
   trade_window_minutes: 60
   pool_state_persist_interval_ms: 1000
   sol_usd_max_divergence_bps: 100
+  change_coalesce_hz: 4              # max market.state.changed per pool per second
+  state_history_seconds: 120         # per-pool state history kept for poolStateAt()
 reference:
   safety_refresh_minutes: 10
   safety_max_age_minutes: 15
